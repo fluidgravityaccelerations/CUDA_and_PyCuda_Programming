@@ -4,7 +4,7 @@
 
 The file contains a simple example of a **CUDA program** that performs element-wise array summation on the GPU. The example is implemented as a **Google Colab Jupyter notebook**, demonstrating how to compile and run CUDA code directly within the Colab environment. It serves as a minimal reference for learning how to allocate memory on the GPU, launch kernels, and manage CUDA error checking.
 
-## PyCUDA Vector Addition Example Version #2 (fiveDifferentWaysToSumVectorsInPyCUDA_version1.ipynb)
+## PyCUDA Vector Addition Example Version #1 (fiveDifferentWaysToSumVectorsInPyCUDA_version1.ipynb)
 
 Example demonstrating how to execute a **CUDA kernel** from within a **Google Colab** environment using **PyCUDA**. The code performs the **elementwise summation of two vectors** on the GPU.
 
@@ -46,3 +46,19 @@ The workflow includes:
 - Measuring execution time with CUDA events
 
 This approach provides a balance between **conciseness** and **flexibility**, enabling custom elementwise GPU computations without writing a full CUDA kernel.
+
+## PyCUDA Vector Addition Example Version #5 (fiveDifferentWaysToSumVectorsInPyCUDA_version5.ipynb)
+
+This version combines the flexibility of a **custom CUDA kernel** defined through `SourceModule` with the convenience of **PyCUDA’s `gpuarray`** class for memory management.
+
+Unlike Version #1, which explicitly allocated and transferred memory using `cuda.mem_alloc` and `memcpy_htod`, this version leverages `gpuarray.to_gpu()` and `gpuarray.zeros_like()` to handle data transfer and device memory allocation automatically.
+
+The workflow includes:
+- Defining and compiling a custom CUDA kernel (`deviceAdd`) with `SourceModule`
+- Managing GPU data using `gpuarray` objects (`d_a`, `d_b`, `d_c`)
+- Launching the kernel directly with `gpuarray` arguments
+- Measuring execution time via CUDA events
+- Retrieving the computed results to the host with `.get()`
+
+This hybrid approach demonstrates how **low-level kernel control** and **high-level data management** can be effectively combined within PyCUDA for efficient and readable GPU programming.
+
