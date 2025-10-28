@@ -31,3 +31,18 @@ The workflow includes:
 - Retrieving the result back to host memory with `.get()`
 
 No explicit kernel definition or memory allocation is required — PyCUDA’s `gpuarray` handles these operations internally, providing a clean and concise syntax for GPU-based computations.
+
+## PyCUDA Vector Addition Example Version #4 (fiveDifferentWaysToSumVectorsInPyCUDA_version4.ipynb)
+
+Example demonstrating how to perform vector operations on the GPU using PyCUDA’s **`ElementwiseKernel`**, which allows defining elementwise operations in a compact and expressive form.
+
+Unlike the `gpuarray` approach, here the output array `d_c` must be **explicitly preallocated** before invoking the kernel.  
+The computation is expressed directly in the kernel body, which is applied independently to each element of the input arrays.
+
+The workflow includes:
+- Defining a general elementwise kernel using `ElementwiseKernel`
+- Performing a **linear combination** of two vectors, `d_c[i] = a * d_a[i] + b * d_b[i]`
+- Managing GPU arrays with explicit input/output control
+- Measuring execution time with CUDA events
+
+This approach provides a balance between **conciseness** and **flexibility**, enabling custom elementwise GPU computations without writing a full CUDA kernel.
