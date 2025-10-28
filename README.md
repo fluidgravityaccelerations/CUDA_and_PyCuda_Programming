@@ -19,3 +19,15 @@ Unlike Version #1, which explicitly allocates GPU memory and manually copies arr
 - `cuda.Out()` copies the computed result from device to host after execution.  
 
 This approach simplifies memory management at the cost of a small overhead due to temporary allocations.  
+
+## PyCUDA Vector Addition Example Version #3 (fiveDifferentWaysToSumVectorsInPyCUDA_version3.ipynb)
+
+Example demonstrating a more **high-level PyCUDA approach** to perform vector addition on the GPU using the `gpuarray` class.  
+Unlike the previous implementations, which explicitly handled memory allocation and data transfer, this version relies on **automatic GPU memory management** provided by PyCUDA.
+
+The workflow includes:
+- Transferring NumPy arrays to the GPU using `gpuarray.to_gpu()`
+- Performing the vector addition directly with `d_c = d_a + d_b`
+- Retrieving the result back to host memory with `.get()`
+
+No explicit kernel definition or memory allocation is required — PyCUDA’s `gpuarray` handles these operations internally, providing a clean and concise syntax for GPU-based computations.
